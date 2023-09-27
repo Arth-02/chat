@@ -8,7 +8,7 @@ from apps.user.serializers import (
 )
 
 class UserView(ListAPIView):
-	queryset = User.objects.all().order_by('first_name')
+	queryset = User.objects.filter(is_superuser=False).order_by('first_name')
 	serializer_class = UserSerializer
 	pagination_class = LimitOffsetPagination
 

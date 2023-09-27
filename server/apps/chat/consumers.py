@@ -3,6 +3,10 @@ from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from apps.chat.models import ChatRoom, ChatMessage
 from apps.user.models import User, OnlineUser
+import logging
+
+# Create a logger object
+logger = logging.getLogger(__name__)
 
 class ChatConsumer(AsyncWebsocketConsumer):
 	def getUser(self, userId):
@@ -68,7 +72,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
 		await self.accept()
 
 	async def disconnect(self, close_code):
+		logger.info("Disconnecting user %s", self.user.username)
 		await database_sync_to_async(self.deleteOnlineUser)(self.user)
+		logger.info("User %s disconnected", self.user.username)
 		await self.sendOnlineUserList()
 		for room in self.userRooms:
 			await self.channel_layer.group_discard(

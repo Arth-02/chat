@@ -15,6 +15,11 @@ const Sidebar = (props) => {
   const [isShowAddPeopleModal, setIsShowAddPeopleModal] = useState(false);
 
   const redirectUserToDefaultChatRoom = (chatUsers) => {
+    console.log("Loaction : " ,props?.location?.pathname)
+    console.log("ChatUsers : " ,chatUsers)
+    console.log("ChatUsers[0] : " ,chatUsers[0])
+    console.log("ChatUsers[0].roomId : " ,chatUsers[0].roomId)
+    console.log("Match : " ,props.match)
     if (props?.location?.pathname === AppPaths.HOME) {
       props.setCurrentChattingMember(chatUsers[0]);
       props.history.push("/c/" + chatUsers[0].roomId);

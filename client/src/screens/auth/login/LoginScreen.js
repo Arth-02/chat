@@ -22,6 +22,7 @@ const LoginScreen = ({ location }) => {
       false
     );
     if (successLoginData) {
+      console.log("Cookie : " , successLoginData);
       Object.keys(successLoginData).forEach((key) => {
         CookieUtil.setCookie(key, successLoginData[key]);
       });

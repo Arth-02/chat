@@ -3,11 +3,16 @@ const setCookie = (cookieName, cookieValue, expairydays = 30) => {
   today.setTime(today.getTime() + expairydays * 24 * 60 * 60 * 1000);
   let expires = "expires=" + today.toUTCString();
   document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+  // getCookie("access");
 };
 
 const getCookie = (cookieName) => {
+  console.log(cookieName)
   let name = cookieName + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
+  console.log("Before : " , typeof(document.cookie));
+  // let decodedCookie = decodeURIComponent(document.cookie);
+  let decodedCookie = document.cookie;
+  console.log("After : " , typeof(decodedCookie));
   let cookieList = decodedCookie.split(";");
   for (let i = 0; i < cookieList.length; i++) {
     let cookie = cookieList[i];
